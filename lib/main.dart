@@ -10,12 +10,18 @@ void main() async {
   if (kIsWeb) {
     await Firebase.initializeApp(
       options: const FirebaseOptions(
-        apiKey: "AIzaSyCmHXkzcRN_pXSJr0eVAoNl4AD2gk9qgLM",
-        appId: "1:912195814616:web:15da0aa6dcf39a03d343ad",
-        messagingSenderId: "912195814616",
-        projectId: "instagram-914a4",
-        storageBucket: "instagram-914a4.appspot.com",
-      ),
+          // apiKey: "AIzaSyCmHXkzcRN_pXSJr0eVAoNl4AD2gk9qgLM",
+          // appId: "1:912195814616:web:15da0aa6dcf39a03d343ad",
+          // messagingSenderId: "912195814616",
+          // projectId: "instagram-914a4",
+          // storageBucket: "instagram-914a4.appspot.com",
+          apiKey: "AIzaSyCmHXkzcRN_pXSJr0eVAoNl4AD2gk9qgLM",
+          authDomain: "instagram-914a4.firebaseapp.com",
+          projectId: "instagram-914a4",
+          storageBucket: "instagram-914a4.appspot.com",
+          messagingSenderId: "912195814616",
+          appId: "1:912195814616:web:15da0aa6dcf39a03d343ad",
+          measurementId: "G-NLY3HDP1B6"),
     );
   } else {
     await Firebase.initializeApp();
@@ -38,8 +44,8 @@ class MyApp extends StatelessWidget {
       //   mobileScreenLayout: MobileScreenLayout(),
       //   webScreenLayout: WebScreenLayout(),
       // ),
-      // home: LoginScreen(),
-      home: SignupScreen(),
+      home: LoginScreen(),
+      // home: SignupScreen(),
     );
   }
 }

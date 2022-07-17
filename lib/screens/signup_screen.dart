@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:instagram/resources/auth_method.dart';
 import 'package:instagram/utils/colors.dart';
 import 'package:instagram/utils/utils.dart';
 import 'package:instagram/widgets/text_input_field.dart';
@@ -20,6 +21,7 @@ class _SignupScreenState extends State<SignupScreen> {
   final TextEditingController _bioController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
   Uint8List? _image;
+  bool _isLoading = false;
 
   @override
   void dispose() {
@@ -36,6 +38,25 @@ class _SignupScreenState extends State<SignupScreen> {
     setState(() {
       _image = im;
     });
+  }
+
+  void signUpUser() async {
+    setState(() {
+      _isLoading = true;
+    });
+    String res = await AuthMethods().signUpUser(
+      email: _emailController.text,
+      password: _passwordController.text,
+      username: _usernameController.text,
+      bio: _bioController.text,
+      file: _image!,
+    );
+    setState(() {
+      _isLoading = false;
+    });
+    if (res != 'success') {
+      showSnackBar(context, res);
+    }
   }
 
   @override
@@ -65,7 +86,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           backgroundImage: MemoryImage(_image!),
                           // backgroundColor: Colors.red,
                         )
-                      : const CircleAvatar(
+                      : CircleAvatar(
                           radius: 64,
                           backgroundImage: NetworkImage(
                               'https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg'),
@@ -76,7 +97,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     left: 80,
                     child: IconButton(
                       onPressed: selectImage,
-                      icon: const Icon(Icons.add_a_photo),
+                      icon: Icon(Icons.add_a_photo),
                     ),
                   )
                 ],
@@ -108,7 +129,7 @@ class _SignupScreenState extends State<SignupScreen> {
               ),
               SizedBox(height: 24),
               InkWell(
-                onTap: () {},
+                onTap: signUpUser,
                 child: Container(
                   width: double.infinity,
                   alignment: Alignment.center,
@@ -121,7 +142,13 @@ class _SignupScreenState extends State<SignupScreen> {
                     ),
                     color: blueColor,
                   ),
-                  child: Text('Sign up'),
+                  child: _isLoading
+                      ? Center(
+                          child: CircularProgressIndicator(
+                            color: primaryColor,
+                          ),
+                        )
+                      : Text('Sign up'),
                 ),
               ),
               SizedBox(height: 12),
