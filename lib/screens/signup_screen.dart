@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:instagram/resources/auth_method.dart';
+import 'package:instagram/responsive/mobile_layout.dart';
+import 'package:instagram/responsive/responsive_layout.dart';
+import 'package:instagram/responsive/web_layout.dart';
 import 'package:instagram/screens/login_screen.dart';
 import 'package:instagram/utils/colors.dart';
 import 'package:instagram/utils/utils.dart';
@@ -55,8 +58,18 @@ class _SignupScreenState extends State<SignupScreen> {
     setState(() {
       _isLoading = false;
     });
+    
     if (res != 'success') {
       showSnackBar(context, res);
+    } else {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => ResponsiveLayout(
+            mobileScreenLayout: MobileScreenLayout(),
+            webScreenLayout: WebScreenLayout(),
+          ),
+        ),
+      );
     }
   }
 
@@ -72,11 +85,11 @@ class _SignupScreenState extends State<SignupScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Scaffold(resizeToAvoidBottomInset:false ,
       body: SafeArea(
         child: Container(
           padding: EdgeInsets.symmetric(
-            horizontal: 32,
+            horizontal: 32
           ),
           width: double.infinity,
           child: Column(
@@ -176,7 +189,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     child: Container(
                       padding: EdgeInsets.symmetric(vertical: 8),
                       child: Text(
-                        "Sign Up",
+                        "Login",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                         ),

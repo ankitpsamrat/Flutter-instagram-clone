@@ -3,6 +3,8 @@ import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:instagram/resources/storage_method.dart';
+// import 'package:instagram/models/user.dart'as model;
+import 'package:instagram/models/user_model.dart' as model;
 
 class AuthMethods {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -36,15 +38,31 @@ class AuthMethods {
 
         // add user to database
 
-        await _firestore.collection('users').doc(cred.user!.uid).set({
-          'username': username,
-          'uid': cred.user!.uid,
-          'photoUrl': photoUrl,
-          'email': email,
-          'bio': bio,
-          'followers': [],
-          'following': [],
-        });
+         model.User user = model.User(
+          username: username,
+          uid: cred.user!.uid,
+          photoUrl: photoUrl,
+          email: email,
+          bio: bio,
+          followers: [].toString(),
+          following: [].toString(),
+        );
+
+
+ await _firestore
+            .collection("users")
+            .doc(cred.user!.uid)
+            .set(user.toJson());
+        // await _firestore.collection('users').doc(cred.user!.uid).set({
+        //   user.toJson(),
+          // 'username': username,
+          // 'uid': cred.user!.uid,
+          // 'photoUrl': photoUrl,
+          // 'email': email,
+          // 'bio': bio,
+          // 'followers': [],
+          // 'following': [],
+        // });
         res = 'succes';
       }
     } catch (err) {
@@ -62,7 +80,6 @@ class AuthMethods {
     String res = 'Some error Occurred';
     try {
       if (email.isNotEmpty || password.isNotEmpty) {
-     
         await _auth.signInWithEmailAndPassword(
           email: email,
           password: password,
