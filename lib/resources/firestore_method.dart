@@ -8,7 +8,7 @@ import 'package:uuid/uuid.dart';
 class FireStoreMethods {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-//    upload post to db mathod
+//    upload post on db method
 
   Future<String> uploadPost(
     String description,
@@ -34,6 +34,31 @@ class FireStoreMethods {
       );
       _firestore.collection('posts').doc(postId).set(post.toJson());
       res = "success";
+    } catch (err) {
+      res = err.toString();
+    }
+    return res;
+  }
+
+//  store likes count on db method
+
+  Future<String> likePost(
+    String postId,
+    String uid,
+    List likes,
+  ) async {
+    String res = "Some error occurred";
+    try {
+      if (likes.contains(uid)) {
+        _firestore.collection('posts').doc(postId).update({
+          'likes': FieldValue.arrayRemove([uid])
+        });
+      } else {
+        _firestore.collection('posts').doc(postId).update({
+          'likes': FieldValue.arrayUnion([uid])
+        });
+      }
+      res = 'success';
     } catch (err) {
       res = err.toString();
     }
