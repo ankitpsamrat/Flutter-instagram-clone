@@ -50,11 +50,11 @@ class FireStoreMethods {
     String res = "Some error occurred";
     try {
       if (likes.contains(uid)) {
-        _firestore.collection('posts').doc(postId).update({
+        await _firestore.collection('posts').doc(postId).update({
           'likes': FieldValue.arrayRemove([uid])
         });
       } else {
-        _firestore.collection('posts').doc(postId).update({
+        await _firestore.collection('posts').doc(postId).update({
           'likes': FieldValue.arrayUnion([uid])
         });
       }
@@ -64,41 +64,41 @@ class FireStoreMethods {
     }
     return res;
   }
-}
 
-// store comment on db method
+  // store comment on db method
 
-Future<String> postComment(
-  String postId,
-  String text,
-  String uid,
-  String name,
-  String profilePic,
-) async {
-  String res = "Some error occurred";
-  try {
-    if (text.isNotEmpty) {
-      String commentId =
-          const Uuid().v1(); // creates unique id for every comment
-      _firestore
-          .collection('posts')
-          .doc(postId)
-          .collection('comments')
-          .doc(commentId)
-          .set({
-        'profilePic': profilePic,
-        'name': name,
-        'uid': uid,
-        'text': text,
-        'commentId': commentId,
-        'datePublished': DateTime.now(),
-      });
-      res = 'success';
-    } else {
-      res = "Please enter text";
+  Future<String> postComment(
+    String postId,
+    String text,
+    String uid,
+    String name,
+    String profilePic,
+  ) async {
+    String res = "Some error occurred";
+    try {
+      if (text.isNotEmpty) {
+        String commentId =
+            const Uuid().v1(); // creates unique id for every comment
+        await _firestore
+            .collection('posts')
+            .doc(postId)
+            .collection('comments')
+            .doc(commentId)
+            .set({
+          'profilePic': profilePic,
+          'name': name,
+          'uid': uid,
+          'text': text,
+          'commentId': commentId,
+          'datePublished': DateTime.now(),
+        });
+        res = 'success';
+      } else {
+        res = "Please enter text";
+      }
+    } catch (err) {
+      res = err.toString();
     }
-  } catch (err) {
-    res = err.toString();
+    return res;
   }
-  return res;
 }

@@ -6,19 +6,19 @@ import 'package:instagram/utils/colors.dart';
 import 'package:instagram/widgets/comment_card.dart';
 import 'package:provider/provider.dart';
 
-class CommentScreen extends StatefulWidget {
-  const CommentScreen({
+class CommentsScreen extends StatefulWidget {
+  const CommentsScreen({
     Key? key,
-    required this.postId,
+    // required this.postId,
   }) : super(key: key);
 
-  final postId;
+  // final postId;
 
   @override
-  State<CommentScreen> createState() => _CommentScreenState();
+  State<CommentsScreen> createState() => _CommentsScreenState();
 }
 
-class _CommentScreenState extends State<CommentScreen> {
+class _CommentsScreenState extends State<CommentsScreen> {
   @override
   Widget build(BuildContext context) {
     final User user = Provider.of<UserProvider>(context).getUser;
@@ -28,81 +28,7 @@ class _CommentScreenState extends State<CommentScreen> {
         title: Text('Comments'),
       ),
 
-      //  access comment from db
-
-      body: StreamBuilder(
-        stream: FirebaseFirestore.instance
-            .collection('posts')
-            .doc(widget.postId)
-            .collection('comments')
-            .snapshots(),
-        builder: (context,
-            AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-
-          return ListView.builder(
-            itemCount: snapshot.data!.docs.length,
-            itemBuilder: (ctx, index) => CommentCard(
-              snap: snapshot.data!.docs[index],
-            ),
-          );
-        },
-      ),
-
-      //  create input field for write comment
-
-      bottomNavigationBar: SafeArea(
-        child: Container(
-          height: kToolbarHeight,
-          margin:
-              EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-          padding: const EdgeInsets.only(left: 16, right: 8),
-          child: Row(
-            children: [
-              CircleAvatar(
-                backgroundImage: NetworkImage(
-                  user.photoUrl,
-                ),
-                radius: 18,
-              ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 16, right: 8),
-                  child: TextField(
-                    decoration: InputDecoration(
-                      hintText: 'Comment as ${user.username}',
-                      border: InputBorder.none,
-                    ),
-                  ),
-                ),
-              ),
-              InkWell(
-                // onTap: () => postComment(
-                //   user.uid,
-                //   user.username,
-                //   user.photoUrl,
-                // ),
-                child: Container(
-                  padding: EdgeInsets.symmetric(
-                    vertical: 8,
-                    horizontal: 8,
-                  ),
-                  child: Text(
-                    'Post',
-                    style: TextStyle(
-                      color: Colors.blue,
-                    ),
-                  ),
-                ),
-              )
-            ],
-          ),
-        ),
-      ),
+      
     );
   }
 }
