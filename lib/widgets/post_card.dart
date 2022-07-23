@@ -5,6 +5,7 @@ import 'package:instagram/providers/user_provoder.dart';
 import 'package:instagram/resources/firestore_method.dart';
 import 'package:instagram/screens/comment_screen.dart';
 import 'package:instagram/utils/colors.dart';
+import 'package:instagram/utils/utils.dart';
 import 'package:instagram/widgets/like_animation.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -31,12 +32,27 @@ class _PostCardState extends State<PostCard> {
     getComments();
   }
 
-  void getComments()async{
-
+  void getComments() async {
+    try {
+      QuerySnapshot snap = await FirebaseFirestore.instance
+          .collection('postd')
+          .doc(widget.snap['postId'])
+          .collection('comments')
+          .get();
+      commentLen = snap.docs.length;
+    } catch (e) {
+      showSnackBar(
+        context,
+        e.toString(),
+      );
+    }
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
+    // @override
+    // Widget build(BuildContext context) {
     final User user = Provider.of<UserProvider>(context).getUser;
     return Container(
       color: mobileBackgroundColor,
@@ -86,7 +102,11 @@ class _PostCardState extends State<PostCard> {
                           children: ['Delete']
                               .map(
                                 (e) => InkWell(
-                                  onTap: () {},
+                                  onTap: () async {
+                                    FireStoreMethods()
+                                        .deletePost(widget.snap['postId']);
+                                    Navigator.of(context).pop();
+                                  },
                                   child: Container(
                                     padding: EdgeInsets.symmetric(
                                       vertical: 12,
@@ -261,7 +281,7 @@ class _PostCardState extends State<PostCard> {
                       vertical: 4,
                     ),
                     child: Text(
-                      'View all comments..',
+                      'View all $commentLen comments',
                       style: TextStyle(
                         fontSize: 16,
                         color: secondaryColor,
