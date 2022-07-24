@@ -58,7 +58,7 @@ class _SignupScreenState extends State<SignupScreen> {
     setState(() {
       _isLoading = false;
     });
-    
+
     if (res != 'success') {
       showSnackBar(context, res);
     } else {
@@ -85,12 +85,11 @@ class _SignupScreenState extends State<SignupScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(resizeToAvoidBottomInset:false ,
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Container(
-          padding: EdgeInsets.symmetric(
-            horizontal: 32
-          ),
+          padding: EdgeInsets.symmetric(horizontal: 32),
           width: double.infinity,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -113,7 +112,8 @@ class _SignupScreenState extends State<SignupScreen> {
                       : CircleAvatar(
                           radius: 64,
                           backgroundImage: NetworkImage(
-                              'https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg'),
+                            'https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg',
+                          ),
                           // backgroundColor: Colors.red,
                         ),
                   Positioned(
