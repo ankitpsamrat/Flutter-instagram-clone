@@ -1,5 +1,6 @@
-import 'dart:typed_data';
+// ignore_for_file: use_build_context_synchronously
 
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:instagram/models/user_model.dart';
@@ -134,9 +135,9 @@ class _AddPostScreenState extends State<AddPostScreen> {
               backgroundColor: mobileBackgroundColor,
               leading: IconButton(
                 onPressed: clearImage,
-                icon: Icon(Icons.arrow_back),
+                icon: const Icon(Icons.arrow_back),
               ),
-              title: Text('Post to'),
+              title: const Text('Post to'),
               actions: [
                 TextButton(
                   onPressed: () => postImage(
@@ -144,7 +145,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
                     user.username,
                     user.photoUrl,
                   ),
-                  child: Text(
+                  child: const Text(
                     'Post',
                     style: TextStyle(
                       color: Colors.blueAccent,
@@ -158,13 +159,13 @@ class _AddPostScreenState extends State<AddPostScreen> {
             body: Column(
               children: [
                 isLoading
-                    ? LinearProgressIndicator()
-                    : Padding(
+                    ? const LinearProgressIndicator()
+                    : const Padding(
                         padding: EdgeInsets.only(
                           top: 0,
                         ),
                       ),
-                      Divider(),
+                const Divider(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -178,7 +179,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
                       width: MediaQuery.of(context).size.width * 0.4,
                       child: TextField(
                         controller: _descriptionController,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           hintText: 'Write a caption..',
                           border: InputBorder.none,
                         ),
@@ -201,7 +202,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
                         ),
                       ),
                     ),
-                    Divider(),
+                    const Divider(),
                   ],
                 ),
               ],

@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:instagram/resources/auth_method.dart';
@@ -6,6 +8,7 @@ import 'package:instagram/responsive/responsive_layout.dart';
 import 'package:instagram/responsive/web_layout.dart';
 import 'package:instagram/screens/signup_screen.dart';
 import 'package:instagram/utils/colors.dart';
+import 'package:instagram/utils/global_variables.dart';
 import 'package:instagram/utils/utils.dart';
 import 'package:instagram/widgets/text_input_field.dart';
 
@@ -39,7 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
     if (res == 'success') {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => ResponsiveLayout(
+          builder: (context) => const ResponsiveLayout(
             mobileScreenLayout: MobileScreenLayout(),
             webScreenLayout: WebScreenLayout(),
           ),
@@ -58,7 +61,7 @@ class _LoginScreenState extends State<LoginScreen> {
   void navigateToSignup() {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => SignupScreen(),
+        builder: (context) => const SignupScreen(),
       ),
     );
   }
@@ -68,9 +71,12 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       body: SafeArea(
         child: Container(
-          padding: EdgeInsets.symmetric(
-            horizontal: 32,
-          ),
+          padding: MediaQuery.of(context).size.width > webScreenSize
+              ? EdgeInsets.symmetric(
+                  horizontal: MediaQuery.of(context).size.width / 3)
+              : const EdgeInsets.symmetric(
+                  horizontal: 32,
+                ),
           width: double.infinity,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -81,29 +87,29 @@ class _LoginScreenState extends State<LoginScreen> {
                 color: primaryColor,
                 height: 64,
               ),
-              SizedBox(height: 64),
+              const SizedBox(height: 64),
               TextFieldInput(
                 hintText: 'Enter your email',
                 textInputType: TextInputType.emailAddress,
                 textEditingController: _emailController,
               ),
-              SizedBox(height: 24),
+              const SizedBox(height: 24),
               TextFieldInput(
                 hintText: 'Enter your password',
                 textInputType: TextInputType.text,
                 textEditingController: _passwordController,
                 isPass: true,
               ),
-              SizedBox(height: 24),
+              const SizedBox(height: 24),
               InkWell(
                 onTap: loginUser,
                 child: Container(
                   width: double.infinity,
                   alignment: Alignment.center,
-                  padding: EdgeInsets.symmetric(
+                  padding: const EdgeInsets.symmetric(
                     vertical: 12,
                   ),
-                  decoration: ShapeDecoration(
+                  decoration: const ShapeDecoration(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(
                         Radius.circular(4),
@@ -112,28 +118,28 @@ class _LoginScreenState extends State<LoginScreen> {
                     color: blueColor,
                   ),
                   child: _isLoading
-                      ? Center(
+                      ? const Center(
                           child: CircularProgressIndicator(
                             color: primaryColor,
                           ),
                         )
-                      : Text('Login'),
+                      : const Text('Login'),
                 ),
               ),
-              SizedBox(height: 12),
+              const SizedBox(height: 12),
               Flexible(flex: 2, child: Container()),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    padding: EdgeInsets.symmetric(vertical: 8),
-                    child: Text("Don't have an account? "),
+                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    child: const Text("Don't have an account? "),
                   ),
                   GestureDetector(
                     onTap: navigateToSignup,
                     child: Container(
-                      padding: EdgeInsets.symmetric(vertical: 8),
-                      child: Text(
+                      padding: const EdgeInsets.symmetric(vertical: 8),
+                      child: const Text(
                         "Sign Up",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,

@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_typing_uninitialized_variables
+
 import 'package:flutter/material.dart';
 import 'package:instagram/utils/colors.dart';
 import 'package:intl/intl.dart';
@@ -18,7 +20,7 @@ class _CommentCardState extends State<CommentCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(
+      padding: const EdgeInsets.symmetric(
         vertical: 18,
         horizontal: 16,
       ),
@@ -32,9 +34,7 @@ class _CommentCardState extends State<CommentCard> {
           ),
           Expanded(
             child: Padding(
-              padding: EdgeInsets.only(
-                left: 16,
-              ),
+              padding: const EdgeInsets.only(left: 16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -44,14 +44,14 @@ class _CommentCardState extends State<CommentCard> {
                       children: [
                         TextSpan(
                           text: widget.snap['name'],
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             color: primaryColor,
                           ),
                         ),
                         TextSpan(
                           text: ' ${widget.snap['text']}',
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: secondaryColor,
                           ),
                         ),
@@ -59,14 +59,12 @@ class _CommentCardState extends State<CommentCard> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(
-                      top: 4,
-                    ),
+                    padding: const EdgeInsets.only(top: 4),
                     child: Text(
                       DateFormat.yMMMd().format(
                         widget.snap['datePublished'].toDate(),
                       ),
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w400,
                       ),
@@ -77,8 +75,8 @@ class _CommentCardState extends State<CommentCard> {
             ),
           ),
           Container(
-            padding: EdgeInsets.all(8),
-            child: Icon(
+            padding: const EdgeInsets.all(8),
+            child: const Icon(
               Icons.favorite,
               size: 16,
             ),

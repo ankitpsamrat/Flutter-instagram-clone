@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:instagram/screens/profile_screen.dart';
 import 'package:instagram/utils/colors.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:instagram/utils/global_variables.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({Key? key}) : super(key: key);
@@ -28,7 +29,7 @@ class _SearchScreenState extends State<SearchScreen> {
         backgroundColor: mobileBackgroundColor,
         title: TextFormField(
           controller: searchController,
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             labelText: 'Search user',
           ),
           onFieldSubmitted: (String _) {
@@ -57,7 +58,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   itemCount: (snapshot.data! as dynamic).docs.length,
                   itemBuilder: (context, index) {
                     return InkWell(
-                      onTap: ()=> Navigator.of(context).push(
+                      onTap: () => Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) => ProfileScreen(
                             uid: (snapshot.data! as dynamic).docs[index]['uid'],
@@ -99,13 +100,16 @@ class _SearchScreenState extends State<SearchScreen> {
                     (snapshot.data! as dynamic).docs[index]['postUrl'],
                     fit: BoxFit.cover,
                   ),
-                  staggeredTileBuilder: (index) => StaggeredTile.count(
-                    (index % 7 == 0) ? 2 : 1,
-                    (index % 7 == 0) ? 2 : 1,
-                    
-                  ),
-                  mainAxisSpacing: 8,
-                  crossAxisSpacing: 8,
+                  staggeredTileBuilder: (index) => MediaQuery.of(context)
+                              .size
+                              .width >
+                          webScreenSize
+                      ? StaggeredTile.count(
+                          (index % 7 == 0) ? 1 : 1, (index % 7 == 0) ? 1 : 1)
+                      : StaggeredTile.count(
+                          (index % 7 == 0) ? 2 : 1, (index % 7 == 0) ? 2 : 1),
+                  mainAxisSpacing: 8.0,
+                  crossAxisSpacing: 8.0,
                 );
               },
             ),

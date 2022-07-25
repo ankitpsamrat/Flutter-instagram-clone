@@ -1,5 +1,6 @@
-import 'dart:typed_data';
+// ignore_for_file: avoid_print
 
+import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:instagram/models/post_model.dart';
 import 'package:instagram/resources/storage_method.dart';

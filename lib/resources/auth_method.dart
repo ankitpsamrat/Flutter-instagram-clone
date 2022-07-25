@@ -1,17 +1,16 @@
-import 'dart:typed_data';
+// ignore_for_file: avoid_print
 
+import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:instagram/resources/storage_method.dart';
-// import 'package:instagram/models/user.dart'as model;
 import 'package:instagram/models/user_model.dart' as model;
 
 class AuthMethods {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-
-   // get user details from database
+  // get user details from database
 
   Future<model.User> getUserDetails() async {
     User currentUser = _auth.currentUser!;
@@ -50,7 +49,7 @@ class AuthMethods {
 
         // add user to database
 
-         model.User user = model.User(
+        model.User user = model.User(
           username: username,
           uid: cred.user!.uid,
           photoUrl: photoUrl,
@@ -60,21 +59,11 @@ class AuthMethods {
           following: [].toString(),
         );
 
-
- await _firestore
+        await _firestore
             .collection("users")
             .doc(cred.user!.uid)
             .set(user.toJson());
-        // await _firestore.collection('users').doc(cred.user!.uid).set({
-        //   user.toJson(),
-          // 'username': username,
-          // 'uid': cred.user!.uid,
-          // 'photoUrl': photoUrl,
-          // 'email': email,
-          // 'bio': bio,
-          // 'followers': [],
-          // 'following': [],
-        // });
+
         res = 'succes';
       }
     } catch (err) {
@@ -105,6 +94,8 @@ class AuthMethods {
     }
     return res;
   }
+
+  //  sign out method
 
   Future<void> signOut() async {
     await _auth.signOut();

@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_typing_uninitialized_variables
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram/models/user_model.dart';
@@ -12,6 +14,7 @@ class CommentsScreen extends StatefulWidget {
     Key? key,
     required this.snap,
   }) : super(key: key);
+
   final snap;
 
   @override
@@ -33,7 +36,7 @@ class _CommentsScreenState extends State<CommentsScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: mobileBackgroundColor,
-        title: Text('Comments'),
+        title: const Text('Comments'),
       ),
       body: StreamBuilder(
         stream: FirebaseFirestore.instance
@@ -44,7 +47,7 @@ class _CommentsScreenState extends State<CommentsScreen> {
             .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           }
@@ -62,7 +65,7 @@ class _CommentsScreenState extends State<CommentsScreen> {
           margin: EdgeInsets.only(
             bottom: MediaQuery.of(context).viewInsets.bottom,
           ),
-          padding: EdgeInsets.only(
+          padding: const EdgeInsets.only(
             left: 16,
             right: 8,
           ),
@@ -103,18 +106,18 @@ class _CommentsScreenState extends State<CommentsScreen> {
                   });
                 },
                 child: Container(
-                  padding: EdgeInsets.symmetric(
+                  padding: const EdgeInsets.symmetric(
                     vertical: 8,
                     horizontal: 8,
                   ),
-                  child: Text(
+                  child: const Text(
                     'Post',
                     style: TextStyle(
                       color: Colors.blue,
                     ),
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),

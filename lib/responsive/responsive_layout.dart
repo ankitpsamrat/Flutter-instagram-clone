@@ -1,3 +1,5 @@
+// ignore_for_file: no_leading_underscores_for_local_identifiers
+
 import 'package:flutter/material.dart';
 import 'package:instagram/providers/user_provoder.dart';
 import 'package:instagram/utils/global_variables.dart';
@@ -18,7 +20,6 @@ class ResponsiveLayout extends StatefulWidget {
 }
 
 class _ResponsiveLayoutState extends State<ResponsiveLayout> {
-
   @override
   void initState() {
     super.initState();
@@ -30,7 +31,7 @@ class _ResponsiveLayoutState extends State<ResponsiveLayout> {
         Provider.of<UserProvider>(context, listen: false);
     await _userProvider.refreshUser();
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(

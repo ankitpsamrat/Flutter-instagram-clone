@@ -15,11 +15,6 @@ void main() async {
   if (kIsWeb) {
     await Firebase.initializeApp(
       options: const FirebaseOptions(
-          // apiKey: "AIzaSyCmHXkzcRN_pXSJr0eVAoNl4AD2gk9qgLM",
-          // appId: "1:912195814616:web:15da0aa6dcf39a03d343ad",
-          // messagingSenderId: "912195814616",
-          // projectId: "instagram-914a4",
-          // storageBucket: "instagram-914a4.appspot.com",
           apiKey: "AIzaSyCmHXkzcRN_pXSJr0eVAoNl4AD2gk9qgLM",
           authDomain: "instagram-914a4.firebaseapp.com",
           projectId: "instagram-914a4",
@@ -56,7 +51,7 @@ class MyApp extends StatelessWidget {
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.active) {
               if (snapshot.hasData) {
-                return ResponsiveLayout(
+                return const ResponsiveLayout(
                   mobileScreenLayout: MobileScreenLayout(),
                   webScreenLayout: WebScreenLayout(),
                 );
@@ -67,17 +62,16 @@ class MyApp extends StatelessWidget {
               }
             }
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(
                   color: primaryColor,
                 ),
               );
             }
-            return LoginScreen();
+            return const LoginScreen();
           },
         ),
       ),
     );
   }
 }
- 
