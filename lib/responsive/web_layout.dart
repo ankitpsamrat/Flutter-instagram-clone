@@ -90,9 +90,9 @@ class _WebScreenLayoutState extends State<WebScreenLayout> {
         ],
       ),
       body: PageView(
-        physics: const NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),    // stop side scroll section
         controller: pageController,
-        onPageChanged: onPageChanged, // stop side scrol section
+        onPageChanged: onPageChanged, 
         children: homeScreenItems,
       ),
     );

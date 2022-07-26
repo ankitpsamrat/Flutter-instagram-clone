@@ -32,10 +32,10 @@ class _PostCardState extends State<PostCard> {
   @override
   void initState() {
     super.initState();
-    getComments();
+    fetchCommentLen();
   }
 
-  void getComments() async {
+  fetchCommentLen() async {
     try {
       QuerySnapshot snap = await FirebaseFirestore.instance
           .collection('postd')
@@ -44,10 +44,7 @@ class _PostCardState extends State<PostCard> {
           .get();
       commentLen = snap.docs.length;
     } catch (e) {
-      showSnackBar(
-        context,
-        e.toString(),
-      );
+      showSnackBar(context, e.toString());
     }
     setState(() {});
   }
@@ -75,10 +72,10 @@ class _PostCardState extends State<PostCard> {
             child: Row(
               children: [
                 CircleAvatar(
-                  radius: 16,
                   backgroundImage: NetworkImage(
-                    widget.snap['profImage'],
+                    widget.snap['profImage'].toString(),
                   ),
+                  radius: 16,
                 ),
                 Expanded(
                   child: Padding(
@@ -88,7 +85,7 @@ class _PostCardState extends State<PostCard> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          widget.snap['username'],
+                          widget.snap['username'].toString(),
                           style: const TextStyle(
                             fontWeight: FontWeight.bold,
                           ),
@@ -100,6 +97,7 @@ class _PostCardState extends State<PostCard> {
                 IconButton(
                   onPressed: () {
                     showDialog(
+                      useRootNavigator: false,
                       context: context,
                       builder: (context) => Dialog(
                         child: ListView(
@@ -111,8 +109,8 @@ class _PostCardState extends State<PostCard> {
                               .map(
                                 (e) => InkWell(
                                   onTap: () async {
-                                    FireStoreMethods()
-                                        .deletePost(widget.snap['postId']);
+                                    FireStoreMethods().deletePost(
+                                        widget.snap['postId'].toString());
                                     Navigator.of(context).pop();
                                   },
                                   child: Container(
@@ -155,7 +153,7 @@ class _PostCardState extends State<PostCard> {
                   height: MediaQuery.of(context).size.height * 0.35,
                   width: double.infinity,
                   child: Image.network(
-                    widget.snap['postUrl'],
+                    widget.snap['postUrl'].toString(),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -175,7 +173,7 @@ class _PostCardState extends State<PostCard> {
                     child: const Icon(
                       Icons.favorite,
                       color: Colors.white,
-                      size: 120,
+                      size: 100,
                     ),
                   ),
                 ),
@@ -210,7 +208,7 @@ class _PostCardState extends State<PostCard> {
                 onPressed: () => Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (context) => CommentsScreen(
-                      snap: widget.snap,
+                      postId: widget.snap['postId'].toString(),
                     ),
                   ),
                 ),
@@ -249,10 +247,9 @@ class _PostCardState extends State<PostCard> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 DefaultTextStyle(
-                  style: Theme.of(context)
-                      .textTheme
-                      .subtitle2!
-                      .copyWith(fontWeight: FontWeight.w800),
+                  style: Theme.of(context).textTheme.subtitle2!.copyWith(
+                        fontWeight: FontWeight.w800,
+                      ),
                   child: Text(
                     '${widget.snap['likes'].length} likes',
                     style: Theme.of(context).textTheme.bodyText2,
@@ -268,7 +265,7 @@ class _PostCardState extends State<PostCard> {
                       ),
                       children: [
                         TextSpan(
-                          text: widget.snap['username'],
+                          text: widget.snap['username'].toString(),
                           style: const TextStyle(
                             fontWeight: FontWeight.bold,
                           ),
@@ -281,7 +278,13 @@ class _PostCardState extends State<PostCard> {
                   ),
                 ),
                 InkWell(
-                  onTap: () {},
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => CommentsScreen(
+                        postId: widget.snap['postId'].toString(),
+                      ),
+                    ),
+                  ),
                   child: Container(
                     padding: const EdgeInsets.symmetric(vertical: 4),
                     child: Text(

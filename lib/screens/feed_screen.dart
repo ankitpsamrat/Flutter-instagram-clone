@@ -31,7 +31,9 @@ class _FeedScreenState extends State<FeedScreen> {
               ),
               actions: [
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    const SnackBar(content: Text("Not supported yet"));
+                  },
                   icon: const Icon(Icons.messenger_outline),
                 ),
               ],

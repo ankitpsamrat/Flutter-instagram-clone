@@ -55,7 +55,6 @@ class _LoginScreenState extends State<LoginScreen> {
       _isLoading = false;
     });
   }
-
 // navigate to signup screen method
 
   void navigateToSignup() {
@@ -106,24 +105,20 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Container(
                   width: double.infinity,
                   alignment: Alignment.center,
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 12,
-                  ),
+                  padding: const EdgeInsets.symmetric(vertical: 12),
                   decoration: const ShapeDecoration(
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(4),
-                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(4)),
                     ),
                     color: blueColor,
                   ),
-                  child: _isLoading
-                      ? const Center(
-                          child: CircularProgressIndicator(
-                            color: primaryColor,
-                          ),
+                  child: !_isLoading
+                      ? const Text(
+                          'Log in',
                         )
-                      : const Text('Login'),
+                      : const CircularProgressIndicator(
+                          color: primaryColor,
+                        ),
                 ),
               ),
               const SizedBox(height: 12),
@@ -133,14 +128,20 @@ class _LoginScreenState extends State<LoginScreen> {
                 children: [
                   Container(
                     padding: const EdgeInsets.symmetric(vertical: 8),
-                    child: const Text("Don't have an account? "),
+                    child: const Text(
+                      'Dont have an account?',
+                    ),
                   ),
                   GestureDetector(
-                    onTap: navigateToSignup,
+                    onTap: () => Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const SignupScreen(),
+                      ),
+                    ),
                     child: Container(
                       padding: const EdgeInsets.symmetric(vertical: 8),
                       child: const Text(
-                        "Sign Up",
+                        ' Signup.',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                         ),

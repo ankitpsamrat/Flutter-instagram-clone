@@ -3,7 +3,6 @@
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:instagram/models/user_model.dart';
 import 'package:instagram/providers/user_provoder.dart';
 import 'package:instagram/resources/firestore_method.dart';
 import 'package:instagram/utils/colors.dart';
@@ -86,10 +85,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
         setState(() {
           isLoading = false;
         });
-        showSnackBar(
-          context,
-          'Posted!',
-        );
+        showSnackBar(context, 'Posted!');
         clearImage();
       } else {
         showSnackBar(context, res);
@@ -98,10 +94,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
       setState(() {
         isLoading = false;
       });
-      showSnackBar(
-        context,
-        err.toString(),
-      );
+      showSnackBar(context, err.toString());
     }
   }
 
@@ -119,7 +112,8 @@ class _AddPostScreenState extends State<AddPostScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final User user = Provider.of<UserProvider>(context).getUser;
+    // final User user = Provider.of<UserProvider>(context).getUser;
+    final UserProvider userProvider = Provider.of<UserProvider>(context);
 
     return _file == null
         ? Center(
@@ -141,9 +135,9 @@ class _AddPostScreenState extends State<AddPostScreen> {
               actions: [
                 TextButton(
                   onPressed: () => postImage(
-                    user.uid,
-                    user.username,
-                    user.photoUrl,
+                    userProvider.getUser.uid,
+                    userProvider.getUser.username,
+                    userProvider.getUser.photoUrl,
                   ),
                   child: const Text(
                     'Post',
@@ -160,11 +154,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
               children: [
                 isLoading
                     ? const LinearProgressIndicator()
-                    : const Padding(
-                        padding: EdgeInsets.only(
-                          top: 0,
-                        ),
-                      ),
+                    : const Padding(padding: EdgeInsets.only(top: 0)),
                 const Divider(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -172,7 +162,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
                   children: [
                     CircleAvatar(
                       backgroundImage: NetworkImage(
-                        user.photoUrl,
+                        userProvider.getUser.photoUrl,
                       ),
                     ),
                     SizedBox(

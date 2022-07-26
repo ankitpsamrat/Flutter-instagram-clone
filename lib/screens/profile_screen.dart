@@ -227,7 +227,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             (snapshot.data! as dynamic).docs[index];
                         return Container(
                           child: Image(
-                            image: NetworkImage(snap['postUrl']),
+                            image: NetworkImage(snap['postUrl'].toString()),
                             fit: BoxFit.cover,
                           ),
                         );

@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram/screens/profile_screen.dart';
@@ -17,10 +19,10 @@ class _SearchScreenState extends State<SearchScreen> {
   bool isShowUsers = false;
 
   @override
-  void dispose() {
-    super.dispose();
-    searchController.dispose();
-  }
+  // void dispose() {
+  //   super.dispose();
+  //   searchController.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +38,7 @@ class _SearchScreenState extends State<SearchScreen> {
             setState(() {
               isShowUsers = true;
             });
+           print(_); 
           },
         ),
       ),

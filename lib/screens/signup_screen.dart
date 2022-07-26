@@ -39,30 +39,61 @@ class _SignupScreenState extends State<SignupScreen> {
 
   void selectImage() async {
     Uint8List im = await pickImage(ImageSource.gallery);
-
     setState(() {
       _image = im;
     });
   }
 
+  // void signUpUser() async {
+  //   setState(() {
+  //     _isLoading = true;
+  //   });
+  //   String res = await AuthMethods().signUpUser(
+  //     email: _emailController.text,
+  //     password: _passwordController.text,
+  //     username: _usernameController.text,
+  //     bio: _bioController.text,
+  //     file: _image!,
+  //   );
+  //   setState(() {
+  //     _isLoading = false;
+  //   });
+
+  //   if (res != 'success') {
+  //     showSnackBar(context, res);
+  //   } else {
+  //     Navigator.of(context).pushReplacement(
+  //       MaterialPageRoute(
+  //         builder: (context) => const ResponsiveLayout(
+  //           mobileScreenLayout: MobileScreenLayout(),
+  //           webScreenLayout: WebScreenLayout(),
+  //         ),
+  //       ),
+  //     );
+  //   }
+  // }
+
+// signup user using our authmethodds
+
   void signUpUser() async {
     setState(() {
       _isLoading = true;
     });
-    String res = await AuthMethods().signUpUser(
-      email: _emailController.text,
-      password: _passwordController.text,
-      username: _usernameController.text,
-      bio: _bioController.text,
-      file: _image!,
-    );
-    setState(() {
-      _isLoading = false;
-    });
 
-    if (res != 'success') {
-      showSnackBar(context, res);
-    } else {
+    String res = await AuthMethods().signUpUser(
+        email: _emailController.text,
+        password: _passwordController.text,
+        username: _usernameController.text,
+        bio: _bioController.text,
+        file: _image!);
+
+    if (res == "success") {
+      setState(() {
+        _isLoading = false;
+      });
+
+      // navigate to the home screen
+
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (context) => const ResponsiveLayout(
@@ -71,18 +102,24 @@ class _SignupScreenState extends State<SignupScreen> {
           ),
         ),
       );
+    } else {
+      setState(() {
+        _isLoading = false;
+      });
+      // show the error
+      showSnackBar(context, res);
     }
   }
 
   // navigate to login screen method
 
-  void navigateToLogin() {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => const LoginScreen(),
-      ),
-    );
-  }
+  // void navigateToLogin() {
+  //   Navigator.of(context).push(
+  //     MaterialPageRoute(
+  //       builder: (context) => const LoginScreen(),
+  //     ),
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -113,7 +150,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       : const CircleAvatar(
                           radius: 64,
                           backgroundImage: NetworkImage(
-                            'https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg',
+                            'https://i.stack.imgur.com/l60Hf.png',
                           ),
                           // backgroundColor: Colors.red,
                         ),
@@ -161,19 +198,17 @@ class _SignupScreenState extends State<SignupScreen> {
                   padding: const EdgeInsets.symmetric(vertical: 12),
                   decoration: const ShapeDecoration(
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(4),
-                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(4)),
                     ),
                     color: blueColor,
                   ),
-                  child: _isLoading
-                      ? const Center(
-                          child: CircularProgressIndicator(
-                            color: primaryColor,
-                          ),
+                  child: !_isLoading
+                      ? const Text(
+                          'Sign up',
                         )
-                      : const Text('Sign up'),
+                      : const CircularProgressIndicator(
+                          color: primaryColor,
+                        ),
                 ),
               ),
               const SizedBox(height: 12),
@@ -183,14 +218,18 @@ class _SignupScreenState extends State<SignupScreen> {
                 children: [
                   Container(
                     padding: const EdgeInsets.symmetric(vertical: 8),
-                    child: const Text("I have already an account? "),
+                    child: const Text('Already have an account?'),
                   ),
                   GestureDetector(
-                    onTap: navigateToLogin,
+                    onTap: () => Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const LoginScreen(),
+                      ),
+                    ),
                     child: Container(
                       padding: const EdgeInsets.symmetric(vertical: 8),
                       child: const Text(
-                        "Login",
+                        ' Login.',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                         ),

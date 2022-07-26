@@ -59,7 +59,7 @@ class FireStoreMethods {
           'likes': FieldValue.arrayUnion([uid])
         });
       }
-      res = 'success';
+      res = "success";
     } catch (err) {
       res = err.toString();
     }
@@ -93,7 +93,7 @@ class FireStoreMethods {
           'commentId': commentId,
           'datePublished': DateTime.now(),
         });
-        res = 'success';
+        res = "success";
       } else {
         res = "Please enter text";
       }
@@ -109,7 +109,7 @@ class FireStoreMethods {
     String res = "Some error occurred";
     try {
       await _firestore.collection('posts').doc(postId).delete();
-      res = 'success';
+      res = "success";
     } catch (err) {
       res = err.toString();
     }

@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, unnecessary_null_comparison
 
 import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -35,12 +35,13 @@ class AuthMethods {
       if (email.isNotEmpty ||
           password.isNotEmpty ||
           username.isNotEmpty ||
-          bio.isNotEmpty) {
+          bio.isNotEmpty||
+          file != null) {
         UserCredential cred = await _auth.createUserWithEmailAndPassword(
           email: email,
           password: password,
         );
-        print(cred.user!.uid);
+        // print(cred.user!.uid);
 
         // add profile photo to database
 
@@ -64,7 +65,9 @@ class AuthMethods {
             .doc(cred.user!.uid)
             .set(user.toJson());
 
-        res = 'succes';
+        res = "success";
+      }else{
+        res="Please enter all the fields";
       }
     } catch (err) {
       res = err.toString();

@@ -10,7 +10,7 @@ class StorageMethods {
   // add image to db storage method
 
   Future<String> uploadImageToStorage(
-      String childName, Uint8List file, bool isPost) async {
+      String childName, Uint8List file, bool isPost,) async {
     Reference ref =
         _storage.ref().child(childName).child(_auth.currentUser!.uid);
 
