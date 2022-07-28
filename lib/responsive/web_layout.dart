@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:instagram/utils/colors.dart';
-import 'package:instagram/utils/global_variables.dart';
+import '/utils/colors.dart';
+import '/utils/global_variables.dart';
 
 class WebScreenLayout extends StatefulWidget {
   const WebScreenLayout({Key? key}) : super(key: key);
@@ -12,7 +12,7 @@ class WebScreenLayout extends StatefulWidget {
 
 class _WebScreenLayoutState extends State<WebScreenLayout> {
   int _page = 0;
-  late PageController pageController; // for tabs animation
+  late PageController pageController;
 
   @override
   void initState() {
@@ -32,8 +32,9 @@ class _WebScreenLayoutState extends State<WebScreenLayout> {
     });
   }
 
+  //  page navigation method
+
   void navigationTapped(int page) {
-    //Animating Page
     pageController.jumpToPage(page);
     setState(() {
       _page = page;
@@ -90,9 +91,10 @@ class _WebScreenLayoutState extends State<WebScreenLayout> {
         ],
       ),
       body: PageView(
-        physics: const NeverScrollableScrollPhysics(),    // stop side scroll section
+        physics:
+            const NeverScrollableScrollPhysics(), // stop side scroll section
         controller: pageController,
-        onPageChanged: onPageChanged, 
+        onPageChanged: onPageChanged,
         children: homeScreenItems,
       ),
     );

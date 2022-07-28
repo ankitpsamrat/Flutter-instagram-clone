@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:instagram/utils/colors.dart';
-import 'package:instagram/utils/global_variables.dart';
+import '/utils/colors.dart';
+import '/utils/global_variables.dart';
 
 class MobileScreenLayout extends StatefulWidget {
   const MobileScreenLayout({Key? key}) : super(key: key);
@@ -31,6 +31,8 @@ class _MobileScreenLayoutState extends State<MobileScreenLayout> {
       _page = page;
     });
   }
+
+  //  page navigation method
 
   void navigationTapped(int page) {
     pageController.jumpToPage(page);

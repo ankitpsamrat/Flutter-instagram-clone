@@ -3,12 +3,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:instagram/resources/auth_method.dart';
-import 'package:instagram/resources/firestore_method.dart';
-import 'package:instagram/screens/login_screen.dart';
-import 'package:instagram/utils/colors.dart';
-import 'package:instagram/utils/utils.dart';
-import 'package:instagram/widgets/follow_botton.dart';
+import '/resources/auth_method.dart';
+import '/resources/firestore_method.dart';
+import '/screens/login_screen.dart';
+import '/utils/colors.dart';
+import '/utils/utils.dart';
+import '/widgets/follow_botton.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({
@@ -36,6 +36,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
     getData();
   }
 
+  //   fetch user from database method
+
   getData() async {
     setState(() {
       isLoading = true;
@@ -46,7 +48,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           .doc(widget.uid)
           .get();
 
-      // fetch number of post, follower & following from db method
+      // fetch number of post, follower & following from database method
 
       var postSnap = await FirebaseFirestore.instance
           .collection('posts')

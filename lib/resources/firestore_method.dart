@@ -1,15 +1,15 @@
 // ignore_for_file: avoid_print
 
 import 'dart:typed_data';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:instagram/models/post_model.dart';
-import 'package:instagram/resources/storage_method.dart';
 import 'package:uuid/uuid.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import '/models/post_model.dart';
+import '/resources/storage_method.dart';
 
 class FireStoreMethods {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-//    upload post on db method
+//    upload post on database method
 
   Future<String> uploadPost(
     String description,
@@ -41,7 +41,7 @@ class FireStoreMethods {
     return res;
   }
 
-//  store likes count on db method
+//  store likes count on database method
 
   Future<String> likePost(
     String postId,
@@ -66,7 +66,7 @@ class FireStoreMethods {
     return res;
   }
 
-  // store comment on db method
+  // store comment on database method
 
   Future<String> postComment(
     String postId,
@@ -103,7 +103,7 @@ class FireStoreMethods {
     return res;
   }
 
-  // delete post from db method
+  // delete post from database method
 
   Future<String> deletePost(String postId) async {
     String res = "Some error occurred";
@@ -116,7 +116,7 @@ class FireStoreMethods {
     return res;
   }
 
-// store number of followers & following to db method
+  // store number of followers & following to database method
 
   Future<void> followUser(
     String uid,

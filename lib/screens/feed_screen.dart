@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:instagram/utils/colors.dart';
-import 'package:instagram/utils/global_variables.dart';
-import 'package:instagram/widgets/post_card.dart';
+import '/utils/colors.dart';
+import '/utils/global_variables.dart';
+import '/widgets/post_card.dart';
 
 class FeedScreen extends StatefulWidget {
   const FeedScreen({Key? key}) : super(key: key);
@@ -31,15 +31,13 @@ class _FeedScreenState extends State<FeedScreen> {
               ),
               actions: [
                 IconButton(
-                  onPressed: () {
-                    const SnackBar(content: Text("Not supported yet"));
-                  },
+                  onPressed: () {},
                   icon: const Icon(Icons.messenger_outline),
                 ),
               ],
             ),
 
-      // fetch post from db
+      // fetch post from database method
 
       body: StreamBuilder(
         stream: FirebaseFirestore.instance.collection('posts').snapshots(),

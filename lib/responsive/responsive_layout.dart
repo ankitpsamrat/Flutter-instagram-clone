@@ -1,9 +1,9 @@
 // ignore_for_file: no_leading_underscores_for_local_identifiers
 
 import 'package:flutter/material.dart';
-import 'package:instagram/providers/user_provoder.dart';
-import 'package:instagram/utils/global_variables.dart';
 import 'package:provider/provider.dart';
+import '/providers/user_provoder.dart';
+import '/utils/global_variables.dart';
 
 class ResponsiveLayout extends StatefulWidget {
   const ResponsiveLayout({

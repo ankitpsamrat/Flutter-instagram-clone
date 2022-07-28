@@ -2,16 +2,16 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:instagram/models/user_model.dart';
-import 'package:instagram/providers/user_provoder.dart';
-import 'package:instagram/resources/firestore_method.dart';
-import 'package:instagram/screens/comment_screen.dart';
-import 'package:instagram/utils/colors.dart';
-import 'package:instagram/utils/global_variables.dart';
-import 'package:instagram/utils/utils.dart';
-import 'package:instagram/widgets/like_animation.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import '/models/user_model.dart';
+import '/providers/user_provoder.dart';
+import '/resources/firestore_method.dart';
+import '/screens/comment_screen.dart';
+import '/utils/colors.dart';
+import '/utils/global_variables.dart';
+import '/utils/utils.dart';
+import '/widgets/like_animation.dart';
 
 class PostCard extends StatefulWidget {
   const PostCard({

@@ -2,12 +2,12 @@
 
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:instagram/providers/user_provoder.dart';
-import 'package:instagram/resources/firestore_method.dart';
-import 'package:instagram/utils/colors.dart';
-import 'package:instagram/utils/utils.dart';
 import 'package:provider/provider.dart';
+import 'package:image_picker/image_picker.dart';
+import '/providers/user_provoder.dart';
+import '/resources/firestore_method.dart';
+import '/utils/colors.dart';
+import '/utils/utils.dart';
 
 class AddPostScreen extends StatefulWidget {
   const AddPostScreen({Key? key}) : super(key: key);
@@ -21,7 +21,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
   bool isLoading = false;
   final TextEditingController _descriptionController = TextEditingController();
 
-// dialog box method
+  //  show a dialog box method
 
   _selectImage(BuildContext parentContext) async {
     return showDialog(
@@ -63,7 +63,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
     );
   }
 
-// post image method
+  //  post image method
 
   void postImage(
     String uid,
@@ -112,7 +112,6 @@ class _AddPostScreenState extends State<AddPostScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // final User user = Provider.of<UserProvider>(context).getUser;
     final UserProvider userProvider = Provider.of<UserProvider>(context);
 
     return _file == null

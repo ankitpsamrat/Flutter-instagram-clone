@@ -2,10 +2,10 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:instagram/screens/profile_screen.dart';
-import 'package:instagram/utils/colors.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:instagram/utils/global_variables.dart';
+import '/screens/profile_screen.dart';
+import '/utils/colors.dart';
+import '/utils/global_variables.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({Key? key}) : super(key: key);
@@ -17,12 +17,6 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   final TextEditingController searchController = TextEditingController();
   bool isShowUsers = false;
-
-  @override
-  // void dispose() {
-  //   super.dispose();
-  //   searchController.dispose();
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -38,10 +32,13 @@ class _SearchScreenState extends State<SearchScreen> {
             setState(() {
               isShowUsers = true;
             });
-           print(_); 
+            print(_);
           },
         ),
       ),
+
+      // search user in database method
+
       body: isShowUsers
           ? FutureBuilder(
               future: FirebaseFirestore.instance

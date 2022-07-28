@@ -4,14 +4,14 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:instagram/resources/auth_method.dart';
-import 'package:instagram/responsive/mobile_layout.dart';
-import 'package:instagram/responsive/responsive_layout.dart';
-import 'package:instagram/responsive/web_layout.dart';
-import 'package:instagram/screens/login_screen.dart';
-import 'package:instagram/utils/colors.dart';
-import 'package:instagram/utils/utils.dart';
-import 'package:instagram/widgets/text_input_field.dart';
+import '/resources/auth_method.dart';
+import '/responsive/mobile_layout.dart';
+import '/responsive/responsive_layout.dart';
+import '/responsive/web_layout.dart';
+import '/screens/login_screen.dart';
+import '/utils/colors.dart';
+import '/utils/utils.dart';
+import '/widgets/text_input_field.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({Key? key}) : super(key: key);
@@ -44,36 +44,7 @@ class _SignupScreenState extends State<SignupScreen> {
     });
   }
 
-  // void signUpUser() async {
-  //   setState(() {
-  //     _isLoading = true;
-  //   });
-  //   String res = await AuthMethods().signUpUser(
-  //     email: _emailController.text,
-  //     password: _passwordController.text,
-  //     username: _usernameController.text,
-  //     bio: _bioController.text,
-  //     file: _image!,
-  //   );
-  //   setState(() {
-  //     _isLoading = false;
-  //   });
-
-  //   if (res != 'success') {
-  //     showSnackBar(context, res);
-  //   } else {
-  //     Navigator.of(context).pushReplacement(
-  //       MaterialPageRoute(
-  //         builder: (context) => const ResponsiveLayout(
-  //           mobileScreenLayout: MobileScreenLayout(),
-  //           webScreenLayout: WebScreenLayout(),
-  //         ),
-  //       ),
-  //     );
-  //   }
-  // }
-
-// signup user using our authmethodds
+  // signup user using authmethods
 
   void signUpUser() async {
     setState(() {
@@ -106,20 +77,9 @@ class _SignupScreenState extends State<SignupScreen> {
       setState(() {
         _isLoading = false;
       });
-      // show the error
       showSnackBar(context, res);
     }
   }
-
-  // navigate to login screen method
-
-  // void navigateToLogin() {
-  //   Navigator.of(context).push(
-  //     MaterialPageRoute(
-  //       builder: (context) => const LoginScreen(),
-  //     ),
-  //   );
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -145,14 +105,12 @@ class _SignupScreenState extends State<SignupScreen> {
                       ? CircleAvatar(
                           radius: 64,
                           backgroundImage: MemoryImage(_image!),
-                          // backgroundColor: Colors.red,
                         )
                       : const CircleAvatar(
                           radius: 64,
                           backgroundImage: NetworkImage(
                             'https://i.stack.imgur.com/l60Hf.png',
                           ),
-                          // backgroundColor: Colors.red,
                         ),
                   Positioned(
                     bottom: -10,

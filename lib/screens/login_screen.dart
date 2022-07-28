@@ -2,15 +2,15 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:instagram/resources/auth_method.dart';
-import 'package:instagram/responsive/mobile_layout.dart';
-import 'package:instagram/responsive/responsive_layout.dart';
-import 'package:instagram/responsive/web_layout.dart';
-import 'package:instagram/screens/signup_screen.dart';
-import 'package:instagram/utils/colors.dart';
-import 'package:instagram/utils/global_variables.dart';
-import 'package:instagram/utils/utils.dart';
-import 'package:instagram/widgets/text_input_field.dart';
+import '/resources/auth_method.dart';
+import '/responsive/mobile_layout.dart';
+import '/responsive/responsive_layout.dart';
+import '/responsive/web_layout.dart';
+import '/screens/signup_screen.dart';
+import '/utils/colors.dart';
+import '/utils/global_variables.dart';
+import '/utils/utils.dart';
+import '/widgets/text_input_field.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -30,6 +30,8 @@ class _LoginScreenState extends State<LoginScreen> {
     _emailController.dispose();
     _passwordController.dispose();
   }
+
+  //   login user method
 
   void loginUser() async {
     setState(() {
@@ -55,7 +57,8 @@ class _LoginScreenState extends State<LoginScreen> {
       _isLoading = false;
     });
   }
-// navigate to signup screen method
+
+  //  navigate to signup screen method
 
   void navigateToSignup() {
     Navigator.of(context).push(
@@ -73,9 +76,7 @@ class _LoginScreenState extends State<LoginScreen> {
           padding: MediaQuery.of(context).size.width > webScreenSize
               ? EdgeInsets.symmetric(
                   horizontal: MediaQuery.of(context).size.width / 3)
-              : const EdgeInsets.symmetric(
-                  horizontal: 32,
-                ),
+              : const EdgeInsets.symmetric(horizontal: 32),
           width: double.infinity,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
