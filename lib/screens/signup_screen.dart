@@ -21,12 +21,17 @@ class SignupScreen extends StatefulWidget {
 }
 
 class _SignupScreenState extends State<SignupScreen> {
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _bioController = TextEditingController();
-  final TextEditingController _usernameController = TextEditingController();
+  //
+
   Uint8List? _image;
   bool _isLoading = false;
+
+  //  text controller
+
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _bioController = TextEditingController();
+  final _usernameController = TextEditingController();
 
   @override
   void dispose() {
@@ -37,6 +42,8 @@ class _SignupScreenState extends State<SignupScreen> {
     _usernameController.dispose();
   }
 
+  //   image select method
+
   void selectImage() async {
     Uint8List im = await pickImage(ImageSource.gallery);
     setState(() {
@@ -44,7 +51,7 @@ class _SignupScreenState extends State<SignupScreen> {
     });
   }
 
-  // signup user using authmethods
+  //  signup user using authmethods
 
   void signUpUser() async {
     setState(() {
@@ -63,7 +70,7 @@ class _SignupScreenState extends State<SignupScreen> {
         _isLoading = false;
       });
 
-      // navigate to the home screen
+      //  navigate to the home screen
 
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
