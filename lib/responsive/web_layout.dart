@@ -48,7 +48,7 @@ class _WebScreenLayoutState extends State<WebScreenLayout> {
         backgroundColor: mobileBackgroundColor,
         centerTitle: false,
         title: SvgPicture.asset(
-          'assets/ic_instagram.svg',
+          'assets/images/ic_instagram.svg',
           color: primaryColor,
           height: 32,
         ),
